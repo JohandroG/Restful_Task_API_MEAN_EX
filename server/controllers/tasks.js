@@ -27,7 +27,14 @@ module.exports = {
     },
 
     addTask: function(req, res){
-        Task.create({title: req.body.title, description: req.body.description, completed: req.body.completed}, function(err, task){
+        Task.create({
+            title: req.body.title, 
+            description: req.body.description, 
+            completed: req.body.completed}, 
+            
+            //todo: request y  request via param
+
+            function(err, task){
             if(err){
                 res.json({message: "Error!", error: err});
             }

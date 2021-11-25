@@ -13,7 +13,7 @@ mongoose.connect("mongodb://127.0.0.1/restful_task_API");
 require("./server/config/mongoose.js");
 
 //Routes
-require("./server/config/routes.js")(app);
+require("./server/routes/tasksRouter.js")(app);
 
 //Port
 app.listen(8080, function(){

@@ -6,4 +6,11 @@ var TaskSchema = new mongoose.Schema({
     completed: {type: Boolean, default: false},
 }, {timestamps: {createdAt: "created_at", updatedAt: "updated_at"}});
 
-mongoose.model("Task", TaskSchema);
+const Task = mongoose.model("Task", TaskSchema);
+
+const TaskModel = {
+
+    //todo al querys
+
+}
+
