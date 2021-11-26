@@ -47,6 +47,11 @@ module.exports = {
                 .then( task => {
                 res.status( 200 ).json( task );
                 })
+                .catch(err => {
+                    console.log(err);
+                    res.statusMessage = "There is another task with that title";
+                    res.status(400).end()
+                })
         }else{
             response.statusMessage = "You are missing a field";
             res.status( 404 ).end();
@@ -87,6 +92,8 @@ module.exports = {
                 })
                 .catch(err => {
                     console.log(err);
+                    res.statusMessage = "There is another task with that title";
+                    res.status(400).end()
                 })
             }
         });
