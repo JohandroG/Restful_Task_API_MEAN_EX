@@ -3,26 +3,27 @@ const {TaskModel} = require('./../models/taskModel');
 
 module.exports = {
 
-    index: function(req, res){
-        Task.find({}, function(err, task){
-            if(err){
-                res.json({message: "Error!", error: err});
-            }
-            else{
-                res.json({message: "Success!", task: task});
-            }
+    requestall: function(req, res){
+        TaskModel
+        .allTasks()
+        .then(data =>{
+            res.status(200).json(data);
         })
     },
 
     details: function(req, res){
         let id = req.params.id;
-        Task.find({_id: id},function(err, task){
-            if(err){
-                res.json({message: "Error!", error: err});
+        TaskModel
+        .taskByTitle(id)
+        .then(task =>{
+            if(task == null){
+                
+                res.status(404).json({err: "This user doesn't exists"})
             }
             else{
-                res.json({message: "Success!", task: task});
+                res.status(200).json(task)
             }
+            
         })
     },
 
@@ -48,9 +49,9 @@ module.exports = {
                 res.status( 200 ).json( task );
                 })
         }else{
-                    res.status( 404 ).end();
+            response.statusMessage = "You are missing a field";
+            res.status( 404 ).end();
         }
-
     },
 
     editTask: function(req, res){

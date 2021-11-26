@@ -30,7 +30,13 @@ const TaskModel = {
 
     newtask: function(task){
         return Task.create(task)
-    }
+    },
+    allTasks : function(){
+        return Task.find();
+    },
+    taskByTitle : function( title ){
+        return Task.findOne({ title });
+    },
 
 }
 

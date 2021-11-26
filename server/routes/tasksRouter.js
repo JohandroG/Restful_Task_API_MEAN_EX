@@ -2,7 +2,7 @@ var tasks = require("../controllers/tasksController");
 
 module.exports = function(app){
 
-    app.get("/tasks", tasks.index)
+    app.get("/tasks", tasks.requestall)
 
     app.get("/tasks/:id", tasks.details)
 
