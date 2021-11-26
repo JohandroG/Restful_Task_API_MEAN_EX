@@ -27,26 +27,30 @@ module.exports = {
     },
 
     addTask: function(req, res){
+        title = req.body.title;
+        description = req.body.description;
+        completed = req.body.completed;
+        created_at = new Date();
+        updated_at = new Date()
+        
+        if(title){
         newtask = {
-            title: req.body.title,
-            description: req.body.description, 
-            completed: req.body.completed,
-            created_at: new Date(),
-            updated_at: new Date()
+            title,
+            description,
+            completed,
+            created_at,
+            updated_at
         }
             
-            
-            //todo: request y  request via param
+                TaskModel
+                .newtask(newtask)
+                .then( task => {
+                res.status( 200 ).json( task );
+                })
+        }else{
+                    res.status( 404 ).end();
+        }
 
-        
-            // if(err){
-            //     res.json({message: "Error!", error: err});
-            // }
-            // else{
-                TaskModel.newtask(newtask);
-                res.json({message: "Success!", added: true});
-            // }
-        
     },
 
     editTask: function(req, res){

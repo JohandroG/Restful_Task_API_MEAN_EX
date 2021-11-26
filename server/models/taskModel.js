@@ -29,7 +29,7 @@ const Task = mongoose.model("Task", TaskSchema);
 const TaskModel = {
 
     newtask: function(task){
-        Task.create(task)
+        return Task.create(task)
     }
 
 }
