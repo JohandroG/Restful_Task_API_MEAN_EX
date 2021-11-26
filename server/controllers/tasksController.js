@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var Task = mongoose.model("Task");
+const {TaskModel} = require('./../models/taskModel');
 
 module.exports = {
 
@@ -27,21 +27,26 @@ module.exports = {
     },
 
     addTask: function(req, res){
-        Task.create({
-            title: req.body.title, 
+        newtask = {
+            title: req.body.title,
             description: req.body.description, 
-            completed: req.body.completed}, 
+            completed: req.body.completed,
+            created_at: new Date(),
+            updated_at: new Date()
+        }
+            
             
             //todo: request y  request via param
 
-            function(err, task){
-            if(err){
-                res.json({message: "Error!", error: err});
-            }
-            else{
+        
+            // if(err){
+            //     res.json({message: "Error!", error: err});
+            // }
+            // else{
+                TaskModel.newtask(newtask);
                 res.json({message: "Success!", added: true});
-            }
-        })
+            // }
+        
     },
 
     editTask: function(req, res){

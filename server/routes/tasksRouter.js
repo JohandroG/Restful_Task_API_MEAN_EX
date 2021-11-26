@@ -1,4 +1,4 @@
-var tasks = require("../controllers/tasks.js");
+var tasks = require("../controllers/tasksController");
 
 module.exports = function(app){
 
