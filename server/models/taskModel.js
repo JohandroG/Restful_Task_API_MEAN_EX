@@ -37,6 +37,9 @@ const TaskModel = {
     taskByTitle : function( title ){
         return Task.findOne({ title });
     },
+    deletetask : function( title ){
+        return Task.remove({ title });
+    },
 
 }
 

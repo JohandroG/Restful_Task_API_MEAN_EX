@@ -4,11 +4,11 @@ module.exports = function(app){
 
     app.get("/tasks", tasks.requestall)
 
-    app.get("/tasks/:id", tasks.details)
+    app.get("/tasks/:title", tasks.details)
 
     app.post("/tasks", tasks.addTask)
 
-    app.put("/tasks/:id", tasks.editTask)
+    app.put("/tasks/:title", tasks.editTask)
 
-    app.delete("/tasks/:id", tasks.deleteTask)
+    app.delete("/tasks/:title", tasks.deleteTask)
 }

@@ -12,9 +12,9 @@ module.exports = {
     },
 
     details: function(req, res){
-        let id = req.params.id;
+        let title = req.params.title;
         TaskModel
-        .taskByTitle(id)
+        .taskByTitle(title)
         .then(task =>{
             if(task == null){
                 
@@ -42,7 +42,6 @@ module.exports = {
             created_at,
             updated_at
         }
-            
                 TaskModel
                 .newtask(newtask)
                 .then( task => {
@@ -83,14 +82,24 @@ module.exports = {
     },
 
     deleteTask: function(req, res){
-        let id = req.params.id;
-        Task.remove({_id: id},function(err){
-            if(err){
-                res.json({message: "Error!", error: err});
+        let title = req.params.title;
+
+        TaskModel
+        .taskByTitle(title)
+        .then(task =>{
+
+            if(task === null){
+                res.statusMessage = "You can not delete a task that doesn't exists";
+                res.status( 404 ).end();
             }
             else{
-                res.json({message: "Success!", removed: true});
+                TaskModel
+                        .deletetask( title )
+                        .then( result => {
+                            res.status( 204 ).end();
+                        });
             }
+
         })
     }
 }
