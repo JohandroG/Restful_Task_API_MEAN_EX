@@ -40,7 +40,9 @@ const TaskModel = {
     deletetask : function( title ){
         return Task.remove({ title });
     },
-
+    updatetask: function(title , taskupdated) {
+        return Task.findOneAndUpdate({title}, {$set : taskupdated}, {new:true})
+    }
 }
 
 module.exports = {TaskModel};

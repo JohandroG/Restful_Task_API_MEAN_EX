@@ -54,32 +54,44 @@ module.exports = {
     },
 
     editTask: function(req, res){
-        let id = req.params.id;
-        Task.findById(id, function(err, task){
-            if(err){
-                res.json({message: "Error!", error: err});
+        let title = req.params.title;
+
+        newtitle = req.body.title;
+        newdescription = req.body.description;
+        newcompleted = req.body.completed;
+        updated_at = new Date();
+
+        TaskModel
+        .taskByTitle(title)
+        .then(task =>{
+            if(task === null){
+                res.statusMessage = "You can not edit a task that doesn't exists";
+                res.status( 404 ).end();
             }
             else{
-                if(req.body.title){
-                    task.title = req.body.title;
+                if(newtitle){
+                    task.title = newtitle;
                 }
-                if(req.body.description){
-                    task.description = req.body.description;
+                if(newdescription){
+                    task.description = newdescription;
                 }
-                if(req.params.completed){
-                    task.completed = req.body.completed;
+                if(newcompleted){
+                    task.completed = newcompleted;
+                }
+                task.updated_at = updated_at
+
+                TaskModel
+                .updatetask(title , task)
+                .then(result=>{
+                    res.status(200).json(result);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
             }
-            task.save(function(err){
-                if(err){
-                    res.json({message: "Error!", error: err});
-                }
-                else{
-                    res.json({message: "Success!", task: task})
-                }
-            })
-            }
-        })
-    },
+        });
+},
+
 
     deleteTask: function(req, res){
         let title = req.params.title;
